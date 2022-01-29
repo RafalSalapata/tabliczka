@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../Helpers/Context";
 
 const Test = () => {
-    const { setStage, questionsNo, diffLevel, correctCounter, setCorrectCounter } = useContext(AppContext)
+    const { setStage, questionsNo, diffLevelMax, diffLevelMin, correctCounter, setCorrectCounter, answersList, setAnswersList } = useContext(AppContext)
 
     const [ currentQuestion, setCurrentQuestion ] = useState(1)
     const [ answer, setAnswer ] = useState('')
@@ -11,15 +11,25 @@ const Test = () => {
 
 
     useEffect( () => {
-        setFirstFactor(Math.floor(diffLevel * Math.random() + 1))
-        setSecondFactor(Math.floor(diffLevel * Math.random() + 1))
-    }, [currentQuestion])
+        let a = Math.floor((diffLevelMax - diffLevelMin + 1) * Math.random() + diffLevelMin)
+        let b = Math.floor((diffLevelMax - a + 1) * Math.random())
+        setFirstFactor(a)
+        setSecondFactor(a+b)
+    }, [currentQuestion, diffLevelMax, diffLevelMin])
 
     const nextQuestion = (e) => {
         e.preventDefault()
         setAnswer('')
 
         const isCorrect = firstFactor * secondFactor === Number(answer)
+        setAnswersList([...answersList, {
+            id : currentQuestion,
+            firstFactor : firstFactor,
+            secondFactor : secondFactor,
+            answer : answer,
+            isCorrect : isCorrect
+        }])
+
         if (isCorrect) setCorrectCounter(correctCounter+1)
 
         if (currentQuestion < questionsNo) {
@@ -30,7 +40,7 @@ const Test = () => {
     }
 
     const answerChange = (e) => {
-        console.log('badInput = ' + e.target.validity.badInput)
+        //console.log('badInput = ' + e.target.validity.badInput)
         if (!e.target.validity.badInput) {
             setAnswer(e.target.value)
         }
