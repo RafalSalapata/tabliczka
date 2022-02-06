@@ -41,6 +41,7 @@ h1 {
 .menu, .test, .summary {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .inputs {
@@ -48,7 +49,8 @@ h1 {
   flex-direction: column;
   text-align: left;
   font-size: 20px;
-  margin: 10px 70px;
+  width: 300px;
+  margin: 10px 10px;
 }
 
 .text-row {
@@ -70,7 +72,7 @@ h1 {
 
 .test .input {
   font-size: 26px;
-  margin: 5px 120px;
+  margin: 5px 100px;
 }
 
 .test input {
@@ -117,6 +119,9 @@ select {
   height: 35px;
   padding: 0 10px;
   font-size: 16px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
 }
 
 button {
@@ -167,4 +172,15 @@ p {
 
 span {
   margin-left: 20px;
+}
+
+@media only screen and (max-width: 440px) {
+  .main-container {
+    width: 390px;
+  }
+
+  .answers-list li {
+    width: 310px;
+    font-size: 18px;
+  }
 }
