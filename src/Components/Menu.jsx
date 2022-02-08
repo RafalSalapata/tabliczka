@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../Helpers/Context";
 
 const Menu = () => {
-    const { state, dispatch } = useContext(AppContext)
+    const { state, dispatch, localization } = useContext(AppContext)
 
     const [ badInputs, setBadInputs ] = useState(false) //false when all inputs make sense
     const [ errorMsg, setErrorMsg ] = useState('') //error message shown whenever inputs are incorrect
@@ -14,10 +14,10 @@ const Menu = () => {
             const diffLevelOK = state.diffLevelMax > state.diffLevelMin
 
             if (!arePositive) {
-                setErrorMsg('Parametry muszą być większe od zera!')
+                setErrorMsg(localization.menuErrMsgPositive)
                 setBadInputs(true)
             } else if (!diffLevelOK) {
-                setErrorMsg('Pole "od" musi być mniejsze od pola "do"')
+                setErrorMsg(localization.menuErrMsgIcrease)
                 setBadInputs(true)
             } else {
                 setBadInputs(false)
@@ -25,7 +25,7 @@ const Menu = () => {
         }
     
         inputsCheck()
-    }, [state])//[questionsNo, diffLevelMax, diffLevelMin])
+    }, [state, localization.menuErrMsgIcrease, localization.menuErrMsgPositive])
 
     const handleChange = (e) => {
         let value = Number(e.target.value)
@@ -41,41 +41,12 @@ const Menu = () => {
         if (!badInputs) dispatch({ type: 'setStage', value: 'test'})
     }
 
-    // const operationChange = (valu) => {
-    //     setOperation(valu)
-    // useEffect( () => {
-    //     switch (operation) {
-    //         case 'multiplication':
-    //             dispatch({ type: 'setDiffLevelMax', value: 10 })
-    //             dispatch({ type: 'setDiffLevelMin', value: 2 })
-    //             console.log('multiplication', state.diffLevelMax, state.diffLevelMin)
-    //             break;
-    //         case 'addition':
-    //             dispatch({ type: 'setDiffLevelMax', value: 20 })
-    //             dispatch({ type: 'setDiffLevelMin', value: 1 })
-    //             console.log('addition', state.diffLevelMax, state.diffLevelMin)
-    //             break;
-    //         case 'subtraction':
-    //             dispatch({ type: 'setDiffLevelMax', value: 30 })
-    //             dispatch({ type: 'setDiffLevelMin', value: 4 })
-    //             console.log('subtraction', state.diffLevelMax, state.diffLevelMin)
-    //             break;
-    //         case 'division':
-    //             dispatch({ type: 'setDiffLevelMax', value: 50 })
-    //             dispatch({ type: 'setDiffLevelMin', value: 4 })
-    //             console.log('division', state.diffLevelMax, state.diffLevelMin)
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }, [operation])
-
     return (
         <div className='menu'>
-            <h1 className='section-title'>Ustawienia</h1>
+            <h1 className='section-title'>{localization.menuSettings}</h1>
             <div className="inputs">
                 <div className="input">
-                    <label>Liczba pytań </label>
+                    <label>{localization.menuQuestNo}</label>
                     <input 
                         type="number"
                         min='1'
@@ -86,30 +57,26 @@ const Menu = () => {
                     />
                 </div>
                 <div className="input">
-                    <label>Działanie</label>
+                    <label>{localization.menuOperation}</label>
                     <select name="operation" id="operation" defaultValue={operation} onChange={ e => setOperation( e.target.value )}>
-                        <option value="multiplication">Mnożenie</option>
-                        <option value="addition" >Dodawanie</option>
-                        <option value="subtraction">Odejmowanie</option>
-                        <option value="division">Dzielenie</option>
+                        <option value="multiplication">{localization.menuMultiplication}</option>
+                        <option value="addition">{localization.menuAddition}</option>
+                        <option value="subtraction">{localization.menuSubtraction}</option>
+                        <option value="division">{localization.menuDivision}</option>
                     </select>
                 </div>
-                <label className="text-row">Zakres działania </label>
+                <label className="text-row">{localization.menuRange}</label>
                 <div className="input range-input">
-                    od:
+                    {localization.menuRangeMin}:
                     <input 
                         type="number" 
-                        // min='1'
-                        // max={state.diffLevelMax}
                         name="rangeMin" 
                         defaultValue={state.diffLevelMin}
                         onChange={handleChange}
                     />
-                    do:
+                    {localization.menuRangeMax}:
                     <input 
                         type="number" 
-                        // min={state.diffLevelMin}
-                        // max='20'
                         name="rangeMax" 
                         defaultValue={state.diffLevelMax}
                         onChange={handleChange}

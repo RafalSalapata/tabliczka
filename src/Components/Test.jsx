@@ -1,8 +1,9 @@
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../Helpers/Context";
+import AnswerList from "./AnswerList";
 
 const Test = () => {
-    const { state, dispatch } = useContext(AppContext)
+    const { state, dispatch, localization } = useContext(AppContext)
 
     const [ currentQuestion, setCurrentQuestion ] = useState(1)
     const [ answer, setAnswer ] = useState('')
@@ -97,7 +98,7 @@ const Test = () => {
 
     return (
         <div className='test'>
-            <h1 className='section-title'>Pytanie nr { currentQuestion }</h1>
+            <h1 className='section-title'>{ localization.testQuestNo + currentQuestion }</h1>
             <form onSubmit={nextQuestion}>
                 <div className='input'>
                     <label> {firstFactor + operationSign + secondFactor} = </label>
@@ -110,7 +111,8 @@ const Test = () => {
                         onChange={(e) => answerChange(e)}
                     />
                 </div>
-                <button type='submit'>Następne pytanie</button> 
+                <button type='submit'>{ localization.testNext }</button>
+                <AnswerList />
             </form>
         </div>
     );

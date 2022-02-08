@@ -29,6 +29,9 @@ export const appReducer = (state, action) => {
       case 'setOperation': return { ...state, 
         operation: action.value
       } 
+      case 'setLang': return { ...state, 
+        lang: action.value
+      } 
       default:
         break
     }
