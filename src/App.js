@@ -26,7 +26,7 @@ const initialState = {
 function App() {
   const [state, dispatch] = useReducer(appReducer, initialState, () => {
     let localLang = localStorage.getItem('lang')
-    return {...initialState,
+    return localLang === null ? initialState : {...initialState,
       lang: localLang
     }
   })

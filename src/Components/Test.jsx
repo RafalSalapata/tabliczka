@@ -41,7 +41,7 @@ const Test = () => {
             setFirstFactor(a)
             setSecondFactor(b)
         }
-    }, [state])//[currentQuestion, diffLevelMax, diffLevelMin])
+    }, [currentQuestion, state.diffLevelMax, state.diffLevelMin, state.operation])
 
     let result = 0
     let operationSign = ''
