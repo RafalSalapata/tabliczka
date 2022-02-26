@@ -32,6 +32,14 @@ export const appReducer = (state, action) => {
       case 'setLang': return { ...state, 
         lang: action.value
       } 
+      case 'changeTheme': return { ...state, 
+        theme: action.value
+      }
+      case 'startNewTest': return { ...state,
+        answersList: [],
+        stage: 'menu',
+        correctCounter: 0
+      }   
       default:
         break
     }

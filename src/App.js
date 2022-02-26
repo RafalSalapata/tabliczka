@@ -2,17 +2,20 @@ import { useReducer } from 'react';
 import { AppContext } from './Helpers/Context';
 import { appReducer } from './Helpers/appReducer';
 import { language } from './TextObjects/language';
+import { lightTheme, darkTheme } from './Helpers/consts';
 
 //components
 import Menu from './Components/Menu';
 import Test from './Components/Test';
 import Summary from './Components/Summary';
-import LocalSwitcher from './Components/LocalSwitcher';
+import Navbar from './Components/Navbar';
 
 //styles
-import './App.css';
+import { ThemeProvider } from 'styled-components';
+import { MainStyled } from './Components/StyledComponents/Main.styled';
+import GlobalStyles from './Components/StyledComponents/GlobalStyles';
 
-const initialState = {
+let initialState = {
   stage: 'menu',
   questionsNo: 10,
   diffLevelMax: 10,
@@ -20,15 +23,24 @@ const initialState = {
   correctCounter: 0,
   answersList: [],
   operation: 'multiplication',
-  lang: 'pl'
+  lang: 'pl',
+  theme: 'light'
 }
 
 function App() {
   const [state, dispatch] = useReducer(appReducer, initialState, () => {
-    let localLang = localStorage.getItem('lang')
-    return localLang === null ? initialState : {...initialState,
-      lang: localLang
+    let localStorageLang = localStorage.getItem('lang')
+    let localStorageTheme = localStorage.getItem('theme')
+  
+    if (localStorageLang) initialState = { ...initialState,
+      lang: localStorageLang
     }
+  
+    if (localStorageTheme) initialState = { ...initialState,
+      theme: localStorageTheme
+    }
+  
+    return initialState
   })
 
   let localization = null
@@ -36,19 +48,19 @@ function App() {
   else localization = language.cz
 
   return (
-    <div className="App">
-      <AppContext.Provider value={{ state, dispatch, localization }}>
-        <div className="topbar">
-          <h1 className='title'>{localization.appName}</h1>
-          <LocalSwitcher />
-        </div>
-        <div className='main-container'>
-          {state.stage === 'menu' && <Menu/> }
-          {state.stage === 'test' && <Test/> }
-          {state.stage === 'summary' && <Summary/> }
-        </div>
-      </AppContext.Provider>
-    </div>
+    <ThemeProvider theme={ state.theme === 'light' ? lightTheme : darkTheme }>
+      <GlobalStyles />
+      <div className="App">
+        <AppContext.Provider value={{ state, dispatch, localization }}>
+          <Navbar/>
+          <MainStyled>
+            {state.stage === 'menu' && <Menu/> }
+            {state.stage === 'test' && <Test/> }
+            {state.stage === 'summary' && <Summary/> }
+          </MainStyled>
+        </AppContext.Provider>
+      </div>
+    </ThemeProvider>
   );
 }
 

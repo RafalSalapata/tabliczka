@@ -5,27 +5,28 @@ import AnswerList from "./AnswerList";
 const Test = () => {
     const { state, dispatch, localization } = useContext(AppContext)
 
-    const [ currentQuestion, setCurrentQuestion ] = useState(1)
-    const [ answer, setAnswer ] = useState('')
-    const [ firstFactor, setFirstFactor ] = useState(0)
-    const [ secondFactor, setSecondFactor ] = useState(0)
+    const [ currentQuestion, setCurrentQuestion ] = useState(1) //index of the current question
+    const [ answer, setAnswer ] = useState('') //user's answer to the current question
+    const [ firstFactor, setFirstFactor ] = useState(0) //first factor of the operation
+    const [ secondFactor, setSecondFactor ] = useState(0) //second factor of the operation
 
+    //this one sets randomly first and second factors of and operation and is fired for each question in the test
     useEffect( () => {
         let a = Math.floor(( state.diffLevelMax - state.diffLevelMin + 1 ) * Math.random() + state.diffLevelMin )
         let b = Math.floor(( state.diffLevelMax - a + 1 ) * Math.random() )
         
-        if ( state.operation === 'multiplication' || state.operation === 'addition' || state.operation === 'subtraction' ) {
+        //division is treated differently as not every two numbers can by divided by themselves
+        if ( state.operation !== 'division' ) {
             setFirstFactor(a+b)
             setSecondFactor(a)
         } else {
-            //division is treated differently as not every two numbers can by divided by themselves
-
             //all divisors of n
             const divisors = (n) => {
                 return [...Array(n+1).keys()].slice(1).filter( i => n % i === 0)
             }
 
-            //this is to avoid the situations where a=b or b=1 as much as possible for a given range of diffLevelMin and diffLevelMax
+            //this is to avoid division by 1 or the situations where firstFactor=secondFactor 
+            //as much as possible for a given range of diffLevelMin and diffLevelMax
             if ( divisors(a).length > 2 ) {
                 b = divisors(a)[Math.floor((divisors(a).length - 2) * Math.random() + 1)]
             } else if ( state.diffLevelMax < 4 ) {
@@ -43,6 +44,7 @@ const Test = () => {
         }
     }, [currentQuestion, state.diffLevelMax, state.diffLevelMin, state.operation])
 
+    //mapping operation to a corresponding sign
     let result = 0
     let operationSign = ''
     switch (state.operation) {
@@ -66,11 +68,12 @@ const Test = () => {
             break;
     }
 
+    //it's fired when moving to the next question or, when it was the last one, to the summary stage
     const nextQuestion = (e) => {
         e.preventDefault()
         setAnswer('')
 
-
+        //this validates user's answer, attach it to the answer object and add it to answer list
         const isCorrect = result === Number(answer)
         dispatch({ type: "addAnswer", value: {
             id : currentQuestion,
@@ -78,7 +81,8 @@ const Test = () => {
             secondFactor : secondFactor,
             result: result,
             answer : answer,
-            isCorrect : isCorrect
+            isCorrect : isCorrect,
+            operationSign: operationSign
         }})
 
         if (isCorrect) dispatch({ type: 'increaseCorrectCounter'})
@@ -104,7 +108,6 @@ const Test = () => {
                     <label> {firstFactor + operationSign + secondFactor} = </label>
                     <input 
                         type="number"
-                        //pattern="/^[0-9]$/"
                         name="questionsNo"
                         value={answer}
                         autoFocus
@@ -112,8 +115,8 @@ const Test = () => {
                     />
                 </div>
                 <button type='submit'>{ localization.testNext }</button>
-                <AnswerList />
             </form>
+            {state.answersList.length > 0 && <AnswerList />}
         </div>
     );
 }
