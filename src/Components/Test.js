@@ -10,7 +10,7 @@ const Test = () => {
     const [ firstFactor, setFirstFactor ] = useState(0) //first factor of the operation
     const [ secondFactor, setSecondFactor ] = useState(0) //second factor of the operation
 
-    //this one sets randomly first and second factors of and operation and is fired for each question in the test
+    //this one sets randomly first and second factors of the operation and is fired for each question in the test
     useEffect( () => {
         let a = Math.floor(( state.diffLevelMax - state.diffLevelMin + 1 ) * Math.random() + state.diffLevelMin )
         let b = Math.floor(( state.diffLevelMax - a + 1 ) * Math.random() )

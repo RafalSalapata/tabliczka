@@ -75,6 +75,9 @@ export const MainStyled = styled.div`
         border: 2px solid ${props => props.theme.headerColor};
         border-radius: 5px;
         transition: 0.4s;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
 
         :hover, :active {
             box-shadow: inset 0px 0 10px ${props => props.theme.headerColor};

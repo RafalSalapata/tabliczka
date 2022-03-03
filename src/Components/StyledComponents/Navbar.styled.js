@@ -147,6 +147,9 @@ export const NavbarStyled = styled.header`
                 border-radius: ${navButtonsRadius};
                 transition: 0.4s;
                 cursor: pointer;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
 
                 :hover {
                     box-shadow: inset 0px 0 10px ${props => props.theme.headerColor};
@@ -159,7 +162,7 @@ export const NavbarStyled = styled.header`
             }
 
             select {
-                padding-left: 5px;
+                text-align: center;
                 font-size: 22px;
             }
 
