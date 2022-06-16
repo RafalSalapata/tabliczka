@@ -14,7 +14,8 @@ export const darkTheme = {
 //used in styled components
 export const styleConsts = {
     minWidth: '350px',
-    midWidth: '570px',
+    midWidth: '625px',
+    // midWidth: '570px',
     navButtonsHeight: '40px',
     navButtonsWidth: '65px',
     navButtonsRadius: '20px'

@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
-import { AppContext } from "../Helpers/Context";
-import AnswerList from "./AnswerList";
+import { AppContext } from "../../Helpers/Context";
+import AnswerList from "../AnswerList";
 
 const Test = () => {
     const { state, dispatch, localization } = useContext(AppContext)
@@ -44,7 +44,7 @@ const Test = () => {
         }
     }, [currentQuestion, state.diffLevelMax, state.diffLevelMin, state.operation])
 
-    //mapping operation to a corresponding sign
+    //maps operation to a corresponding sign and sets up the result of current opperation
     let result = 0
     let operationSign = ''
     switch (state.operation) {
@@ -71,7 +71,6 @@ const Test = () => {
     //it's fired when moving to the next question or, when it was the last one, to the summary stage
     const nextQuestion = (e) => {
         e.preventDefault()
-        setAnswer('')
 
         //this validates user's answer, attach it to the answer object and add it to answer list
         const isCorrect = result === Number(answer)
@@ -92,6 +91,8 @@ const Test = () => {
         } else {
             dispatch({ type: 'setStage', value: 'summary' })
         }
+        
+        setAnswer('')
     }
 
     const answerChange = (e) => {
@@ -100,10 +101,16 @@ const Test = () => {
         }
     }
 
+    const handleEnterPress = (e) => {
+        if (e.code === 'Enter' && answer !== '') {
+            nextQuestion(e)
+        }
+    }
+
     return (
         <div className='test'>
             <h1 className='section-title'>{ localization.testQuestNo + currentQuestion }</h1>
-            <form onSubmit={nextQuestion}>
+            <div className="inputs">
                 <div className='input'>
                     <label> {firstFactor + operationSign + secondFactor} = </label>
                     <input 
@@ -112,10 +119,13 @@ const Test = () => {
                         value={answer}
                         autoFocus
                         onChange={(e) => answerChange(e)}
+                        onKeyPress={handleEnterPress}
                     />
                 </div>
-                <button type='submit'>{ localization.testNext }</button>
-            </form>
+            </div>
+            <button disabled={answer === '' ? true : false } onClick={nextQuestion}>
+                { localization.testNext }
+            </button>
             {state.answersList.length > 0 && <AnswerList />}
         </div>
     );

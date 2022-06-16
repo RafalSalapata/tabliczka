@@ -31,7 +31,7 @@ export const NavbarStyled = styled.header`
         align-items: center;
         justify-content: space-between;
         position: relative;
-        transition: all 0.5s ease-in-out 200ms;
+        transition: all 0.3s ease-in-out 200ms;
 
         @media (max-width: ${midWidth}) {
             height: 57px;
@@ -117,7 +117,7 @@ export const NavbarStyled = styled.header`
             #nav-buttons-checkbox:checked ~ nav {
                 transform: scale(1, 0);
                 transform-origin: top;
-                transition: transform 400ms ease-in-out;
+                transition: transform 300ms ease-in-out;
             }
         }
 
@@ -128,7 +128,7 @@ export const NavbarStyled = styled.header`
             align-items: center;
             transform: scale(1, 1);
             transform-origin: top;
-            transition: transform 400ms ease-in-out 200ms;
+            transition: transform 200ms ease-in-out 200ms;
 
             @media (max-width: ${midWidth}) {
                 position: absolute;
@@ -145,7 +145,7 @@ export const NavbarStyled = styled.header`
                 font-family: Quicksand, Arial, Helvetica, sans-serif;
                 border: 2px solid ${props => props.theme.headerColor};
                 border-radius: ${navButtonsRadius};
-                transition: 0.4s;
+                transition: 0.2s;
                 cursor: pointer;
                 -webkit-appearance: none;
                 -moz-appearance: none;
@@ -158,7 +158,7 @@ export const NavbarStyled = styled.header`
 
             label:active, select:active, button:active {
                 box-shadow: 0 0 15px 3px ${props => props.theme.headerColor};
-                transition: 0.5s;
+                transition: 0.3s;
             }
 
             select {
@@ -171,14 +171,20 @@ export const NavbarStyled = styled.header`
             }
 
             button {
-                font-size: 35px;
+                font-size: 33px;
                 position: relative;
                 
                 span {
                     position: absolute;
-                    top: 1px;
-                    left: 14px;
+                    top: 2px;
+                    left: 15px;
                 }
+            }
+
+            .home-button span {
+                font-size: 30px;
+                top: 3px;
+                left: 16px;
             }
 
             /* theme toggle styled */

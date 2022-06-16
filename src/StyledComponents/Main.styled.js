@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { styleConsts } from '../../Helpers/consts'
+import { styleConsts } from '../Helpers/consts'
 
 const midWidth = styleConsts.midWidth
 const minWidth = styleConsts.minWidth
