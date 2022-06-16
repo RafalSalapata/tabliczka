@@ -100,10 +100,16 @@ const Test = () => {
         }
     }
 
+    const handleEnterPress = (e) => {
+        if (e.code === 'Enter' && answer !== '') {
+            nextQuestion(e)
+        }
+    }
+
     return (
         <div className='test'>
             <h1 className='section-title'>{ localization.testQuestNo + currentQuestion }</h1>
-            <form onSubmit={nextQuestion}>
+            <div className="inputs">
                 <div className='input'>
                     <label> {firstFactor + operationSign + secondFactor} = </label>
                     <input 
@@ -112,10 +118,13 @@ const Test = () => {
                         value={answer}
                         autoFocus
                         onChange={(e) => answerChange(e)}
+                        onKeyPress={handleEnterPress}
                     />
                 </div>
-                <button type='submit'>{ localization.testNext }</button>
-            </form>
+            </div>
+            <button disabled={answer === '' ? true : false } onClick={nextQuestion}>
+                { localization.testNext }
+            </button>
             {state.answersList.length > 0 && <AnswerList />}
         </div>
     );
