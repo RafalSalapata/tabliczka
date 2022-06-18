@@ -101,9 +101,7 @@ const Test = () => {
     }
 
     const handleEnterPress = (e) => {
-        if (e.code === 'Enter' && answer !== '') {
-            nextQuestion(e)
-        }
+        if (e.charCode === 13 && answer !== '') nextQuestion(e)
     }
 
     return (
