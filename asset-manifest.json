@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/tabliczka/static/js/main.2b2d1743.js",
+    "main.js": "/tabliczka/static/js/main.907cf768.js",
     "index.html": "/tabliczka/index.html",
-    "main.2b2d1743.js.map": "/tabliczka/static/js/main.2b2d1743.js.map"
+    "main.907cf768.js.map": "/tabliczka/static/js/main.907cf768.js.map"
   },
   "entrypoints": [
-    "static/js/main.2b2d1743.js"
+    "static/js/main.907cf768.js"
   ]
 }
