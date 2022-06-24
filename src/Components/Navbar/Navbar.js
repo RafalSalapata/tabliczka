@@ -36,7 +36,7 @@ const Navbar = () => {
 
     const goHome = () => {
         dispatch({ type: 'goHome'})
-        navigate('/')
+        navigate('/tabliczka/')
     }
 
     return (

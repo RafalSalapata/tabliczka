@@ -15,13 +15,13 @@ const ChoosePage = () => {
     const goToCalcTest = () => {
         dispatch( {type: 'setTestType', value: 'calc'} )
         dispatch( {type: 'setStage', value: 'menu'} )
-        navigate('/nauka-liczenia')
+        navigate('/tabliczka/nauka-liczenia')
     }
 
     const goToEnglishTest = () => {
         dispatch( {type: 'setTestType', value: 'english'} )
         dispatch( {type: 'setStage', value: 'menu'} )
-        navigate('/nauka-angielskiego')
+        navigate('/tabliczka/nauka-angielskiego')
     }
 
     return (

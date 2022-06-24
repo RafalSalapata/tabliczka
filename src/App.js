@@ -25,9 +25,9 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Routes >
-            <Route path='/' element={<ChoosePage />} />
-            <Route path='/nauka-liczenia' element={<MainApp />} />
-            <Route path='/nauka-angielskiego' element={<MainApp />} />
+            <Route path='/tabliczka/' element={<ChoosePage />} />
+            <Route path='/tabliczka/nauka-liczenia' element={<MainApp />} />
+            <Route path='/tabliczka/nauka-angielskiego' element={<MainApp />} />
           </Routes>
         </BrowserRouter>
       </div>
