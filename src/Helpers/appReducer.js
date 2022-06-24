@@ -39,6 +39,11 @@ export const appReducer = (state, action) => {
       answersList: [],
       stage: 'menu',
       correctCounter: 0
+    }
+    case 'goHome': return { ...state,
+      answersList: [],
+      stage: 'home',
+      correctCounter: 0
     }   
     case 'setTestType': return { ...state,
       testType: action.value

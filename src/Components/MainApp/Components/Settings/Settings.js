@@ -1,13 +1,13 @@
 import { useContext, useState, useEffect } from "react";
-import { AppContext } from "../../Helpers/Context";
+import { AppContext } from "../../../../Helpers/Context";
 
 const Settings = () => {
     const { state, dispatch, localization } = useContext(AppContext)
 
     const [ badInputs, setBadInputs ] = useState(false) //false when all inputs make sense
     const [ errorMsg, setErrorMsg ] = useState('') //error message shown whenever inputs are incorrect
-    const [ operation, setOperation ] = useState(state.operation) //it stores the type of operation, like: multiplication, subtruction, etc...
-    const [ enTestSubject, setEnTestSubject ] = useState(state.enTestSubject) //it stores the the english subject, like: colors, clothes, etc...
+    const [ operation, setOperation ] = useState(state.operation) //stores the type of operation, like: multiplication, subtruction, etc...
+    const [ enTestSubject, setEnTestSubject ] = useState(state.enTestSubject) //stores english test subject, like: colors, clothes, etc...
 
     //checking inputs correctness and setting error message 
     useEffect( () => {
@@ -50,11 +50,14 @@ const Settings = () => {
     return (
         <div>
             <h1 className='section-title'>{ localization.menuSettings }</h1>
-            <div className="inputs" hidden={ state.testType !== 'english'}>
-                <label>Wybierz temat testu</label>
-                <select defaultValue={ enTestSubject } onChange={ e => setEnTestSubject( e.target.value ) }>
-                    <option value="colors">Kolory</option>
-                    <option value="numbers">Liczby</option>
+            <div className="inputs" hidden={ state.testType !== 'english' }>
+                <label>{ localization.menuSubject }</label>
+                <select defaultValue={ enTestSubject } onChange={ e => setEnTestSubject( e.target.value )}>
+                    <option value="colors">{ localization.menuColors }</option>
+                    <option value="numbers">{ localization.menuNumbers }</option>
+                    <option value="animals">{ localization.menuAnimals }</option>
+                    <option value="positions">{ localization.menuPositions }</option>
+                    <option value="weekdays">{ localization.menuWeekdays }</option>
                 </select>
             </div>
             <div className="inputs" hidden={ state.testType !== 'calc'}>

@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { AppContext } from "../../Helpers/Context";
 import { MainStyled } from "../../StyledComponents/Main.styled";
 
-import Settings from "../Settings";
-import Summary from "../Summary";
-import Test from "../Test";
-import EnTest from "../EnTest";
+import Settings from "./Components/Settings";
+import Summary from "./Components/Summary";
+import Test from "./Components/Test";
+import EnTest from "./Components/EnTest";
 
 const MainApp = () => {
     const { state } = useContext(AppContext)

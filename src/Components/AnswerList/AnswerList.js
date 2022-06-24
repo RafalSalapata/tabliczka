@@ -16,7 +16,7 @@ const AnswerList = () => {
                     </li>
                 ) : (
                     <li key={item.id} className={item.isCorrect ? "" : "incorrect"}>
-                        {item.currentPhrasePl} = {item.answer}
+                        {item.currentPhrase} = {item.answer}
                         <span>{item.isCorrect ? "" : localization.summarySholdBe + item.currentPhraseEn}</span>
                     </li>
                 ))}

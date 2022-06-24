@@ -122,6 +122,27 @@ export const MainStyled = styled.div`
         font-size: 26px;
     }
 
+    .test .en-input {
+        margin: 10px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .test .en-input input {
+        width: 100%;
+        height: 50px;
+        margin: 0;
+    }
+
+    .test .en-input label {
+        width: 100%;
+        text-align: center;
+        margin: 5px 0px 15px 0px;
+        font-size: 26px;
+    }
+
     .resultMsg {
         height: 50px;
         margin: 10px 0;

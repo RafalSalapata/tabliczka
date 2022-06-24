@@ -1,16 +1,19 @@
+//libraries
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 import { useContext } from 'react';
+
+//internal
 import { AppContext } from './Helpers/Context';
 import { lightTheme, darkTheme } from './Helpers/consts';
 
 //components
 import MainApp from './Components/MainApp/MainApp';
-
-//styles
-import { ThemeProvider } from 'styled-components';
-import GlobalStyles from './StyledComponents/GlobalStyles';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import ChoosePage from './Components/ChoosePage/ChoosePage';
+
+//styles
+import GlobalStyles from './StyledComponents/GlobalStyles';
 
 function App() {
   const { state } = useContext(AppContext)

@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
-import { AppContext } from "../../Helpers/Context";
-import AnswerList from "../AnswerList";
+import { AppContext } from "../../../../Helpers/Context";
+import AnswerList from "../../../AnswerList";
 
 const Test = () => {
     const { state, dispatch, localization } = useContext(AppContext)
@@ -101,7 +101,7 @@ const Test = () => {
         }
     }
 
-    const handleEnterPress = (e) => {
+    const handlePressEnter = (e) => {
         if (e.charCode === 13 && answer !== '') nextQuestion(e)
     }
 
@@ -117,7 +117,7 @@ const Test = () => {
                         value={answer}
                         autoFocus
                         onChange={(e) => answerChange(e)}
-                        onKeyPress={handleEnterPress}
+                        onKeyPress={handlePressEnter}
                     />
                 </div>
             </div>

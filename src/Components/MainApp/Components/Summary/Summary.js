@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { AppContext } from "../../Helpers/Context";
-import AnswerList from "../AnswerList/AnswerList";
+import { AppContext } from "../../../../Helpers/Context";
+import AnswerList from "../../../AnswerList/AnswerList";
 
 const Summary = () => {
     const { state, dispatch, localization } = useContext(AppContext)

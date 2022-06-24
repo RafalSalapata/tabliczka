@@ -1,9 +1,12 @@
+//libraries
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../../Helpers/Context";
 import { GrSun } from 'react-icons/gr'
 import { RiMoonFill, RiHome2Line } from 'react-icons/ri'
 import { MdOutlineSettingsBackupRestore } from 'react-icons/md'
+
+//internal
+import { AppContext } from "../../Helpers/Context";
 
 //styles
 import { NavbarStyled } from "./Navbar.styled";
@@ -32,15 +35,15 @@ const Navbar = () => {
     }
 
     const goHome = () => {
-        dispatch({ type: 'startNewTest'})
+        dispatch({ type: 'goHome'})
         navigate('/')
     }
 
     return (
         <NavbarStyled>
             <input 
-                type="checkbox" 
-                id="navbar-container-checkbox" 
+                type="checkbox"
+                id="navbar-container-checkbox"
                 checked={navButtonsVisble}
                 onChange={()=>{}}
             />
@@ -48,29 +51,29 @@ const Navbar = () => {
                 <h1 className="logo">{ localization.appName }</h1>
                 <label htmlFor="hamburger-checkbox" id="hamburger-wrapper">
                     <input 
-                        type="checkbox"  
+                        type="checkbox"
                         id="hamburger-checkbox" 
                         onChange={(e) => setNavButtonsVisble(e.target.checked)}
                     />
                     <div className="hamburger" title='hamburger'></div>
                 </label>
-                <input 
+                <input
                     type="checkbox" 
                     id="nav-buttons-checkbox"
                     checked={!navButtonsVisble}
                     onChange={()=>{}}
                 />
                 <nav className="nav-buttons">
-                    <button className='home-button' onClick={goHome}>
+                    <button className={ state.stage === 'home' ? 'hidden' : 'home-button' } onClick={goHome}>
                         <span> <RiHome2Line/> </span>
                     </button>
-                    <button onClick={ newTest } className={ state.stage === 'menu' ? 'hidden' : '' }> 
+                    <button onClick={ newTest } className={ state.stage === 'menu' || state.stage === 'home' ? 'hidden' : '' }> 
                         <span> <MdOutlineSettingsBackupRestore/> </span>
                     </button>
                     <input 
                         type="checkbox" 
                         id="theme-toggle" 
-                        onChange={ changeTheme } 
+                        onChange={ changeTheme }
                         checked={ state.theme === 'light' ? true : false }
                     />
                     <label htmlFor="theme-toggle" id="theme-toggle-label" data-testid="theme-toggle-label">

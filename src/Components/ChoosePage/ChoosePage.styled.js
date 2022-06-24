@@ -1,5 +1,4 @@
 import styled from "styled-components";
-//import { styleConsts } from '../../Helpers/consts'
 
 export const MainPageStyled = styled.header`
     max-width: 400px;

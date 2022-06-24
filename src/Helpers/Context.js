@@ -6,7 +6,7 @@ export const AppContext = createContext()
 
 export const AppContextProvider = props => {
     let initialState = {
-        stage: 'menu',
+        stage: 'home',
         testType: '',
         questionsNo: 10,
         diffLevelMax: 10,
@@ -16,7 +16,7 @@ export const AppContextProvider = props => {
         operation: 'multiplication',
         lang: 'pl',
         theme: 'light',
-        enTestSubject: '',
+        enTestSubject: 'colors',
     }
 
     const [state, dispatch] = useReducer(appReducer, initialState, () => {
