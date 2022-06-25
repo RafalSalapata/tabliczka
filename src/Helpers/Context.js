@@ -7,8 +7,8 @@ export const AppContext = createContext()
 
 export const AppContextProvider = props => {
     const location = useLocation();
-    const initStage = location.pathname === '/tabliczka' ? 'home' : 'menu'
-    const initTestType = location.pathname === '/tabliczka/nauka-liczenia' ? 'calc' : 'english'
+    const initStage = location.pathname === '/' ? 'home' : 'menu'
+    const initTestType = location.pathname === '/nauka-liczenia' ? 'calc' : 'english'
 
     let initialState = {
         stage: initStage,
