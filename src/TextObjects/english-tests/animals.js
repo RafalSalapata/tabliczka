@@ -2,17 +2,17 @@
 const animals = [
     {
         en: 'dog',
-        pl: 'Pies',
+        pl: 'pies',
         cz: 'pes',
     },
     {
         en: 'cat',
-        pl: 'Kot',
+        pl: 'kot',
         cz: 'kočka',
     },
     {
         en: 'bird',
-        pl: 'Ptak',
+        pl: 'ptak',
         cz: 'pták',
     },
     {

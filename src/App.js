@@ -1,5 +1,5 @@
 //libraries
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { useContext } from 'react';
 
@@ -22,14 +22,12 @@ function App() {
     <ThemeProvider theme={ state.theme === 'light' ? lightTheme : darkTheme }>
       <GlobalStyles />
       <div className="App">
-        <BrowserRouter>
-          <Navbar />
-          <Routes >
-            <Route path='/tabliczka/' element={<ChoosePage />} />
-            <Route path='/tabliczka/nauka-liczenia' element={<MainApp />} />
-            <Route path='/tabliczka/nauka-angielskiego' element={<MainApp />} />
-          </Routes>
-        </BrowserRouter>
+        <Navbar />
+        <Routes >
+          <Route path='/tabliczka/' element={<ChoosePage />} />
+          <Route path='/tabliczka/nauka-liczenia' element={<MainApp />} />
+          <Route path='/tabliczka/nauka-angielskiego' element={<MainApp />} />
+        </Routes>
       </div>
     </ThemeProvider>
   );

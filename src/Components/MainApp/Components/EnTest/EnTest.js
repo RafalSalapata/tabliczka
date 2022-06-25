@@ -74,6 +74,7 @@ const EnTest = () => {
                     <input 
                         type="text"
                         //name="questionsNo"
+                        autoCapitalize='none'
                         value={answer}
                         autoFocus
                         onChange={(e) => setAnswer(e.target.value)}

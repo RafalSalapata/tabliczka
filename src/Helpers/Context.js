@@ -1,13 +1,18 @@
 import {createContext, useReducer} from 'react'
+import { useLocation } from 'react-router-dom'
 import { language } from '../TextObjects/language'
 import { appReducer } from './appReducer'
 
 export const AppContext = createContext()
 
 export const AppContextProvider = props => {
+    const location = useLocation();
+    const initStage = location.pathname === '/tabliczka' ? 'home' : 'menu'
+    const initTestType = location.pathname === '/tabliczka/nauka-liczenia' ? 'calc' : 'english'
+
     let initialState = {
-        stage: 'home',
-        testType: '',
+        stage: initStage,
+        testType: initTestType,
         questionsNo: 10,
         diffLevelMax: 10,
         diffLevelMin: 2,
