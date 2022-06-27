@@ -14,6 +14,10 @@ export const AppContextProvider = props => {
         stage: initStage,
         testType: initTestType,
         questionsNo: 10,
+        enTestLenght: {
+            maxQuestionsNo: 10,
+            availableNo: 100000,
+        },
         diffLevelMax: 10,
         diffLevelMin: 2,
         correctCounter: 0,
@@ -27,11 +31,11 @@ export const AppContextProvider = props => {
     const [state, dispatch] = useReducer(appReducer, initialState, () => {
         let localStorageLang = localStorage.getItem('lang')
         let localStorageTheme = localStorage.getItem('theme')
-      
+
         if (localStorageLang) initialState = { ...initialState,
           lang: localStorageLang
         }
-      
+
         if (localStorageTheme) initialState = { ...initialState,
           theme: localStorageTheme
         }

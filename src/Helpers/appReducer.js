@@ -1,13 +1,23 @@
 export const appReducer = (state, action) => {
   switch (action.type) {
     case 'setQuestionsNo': return { ...state, 
-        questionsNo: action.value
+      questionsNo: action.value
+    }
+    case 'setMaxQuestionsNo': return { ...state, 
+      enTestLenght: { ...(state.enTestLenght),
+        maxQuestionsNo: action.value
+      }
+    }
+    case 'setAvailableNo': return { ...state, 
+      enTestLenght: { ...(state.enTestLenght),
+        availableNo: action.value
+      }
     }
     case 'setDiffLevelMax': return { ...state, 
-        diffLevelMax: action.value
+      diffLevelMax: action.value
     }
     case 'setDiffLevelMin': return { ...state, 
-        diffLevelMin: action.value
+      diffLevelMin: action.value
     }
     case 'setStage': return { ...state, 
       stage: action.value

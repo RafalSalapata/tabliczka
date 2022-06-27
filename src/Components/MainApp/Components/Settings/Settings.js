@@ -12,7 +12,13 @@ const Settings = () => {
     //checking inputs correctness and setting error message 
     useEffect( () => {
         const inputsCheck = () => {
-            const arePositive = state.questionsNo > 0 && state.diffLevelMax > 0 && state.diffLevelMin > 0
+            const arePositive = Math.min(
+                state.questionsNo,
+                state.diffLevelMax,
+                state.diffLevelMin,
+                state.enTestLenght.maxQuestionsNo,
+            ) > 0
+
             const diffLevelOK = state.diffLevelMax > state.diffLevelMin
 
             if (!arePositive) {
@@ -23,20 +29,39 @@ const Settings = () => {
                 setBadInputs(true)
             } else {
                 setBadInputs(false)
-            } 
+            }
         }
-    
+
         inputsCheck()
-    }, [state.questionsNo, state.diffLevelMax, state.diffLevelMin, localization])
+    }, [
+        state.questionsNo, 
+        state.diffLevelMax, 
+        state.diffLevelMin, 
+        state.enTestLenght.maxQuestionsNo, 
+        localization,
+    ])
 
     //it's launched whenever any numerical input changes
     const paramsChange = (e) => {
         let newValue = Number(e.target.value)
         let name = e.target.name
 
-        if (name === "questionsNo") dispatch({ type: 'setQuestionsNo', value: newValue}) 
-        else if (name === "rangeMax") dispatch({ type: 'setDiffLevelMax', value: newValue})
-        else dispatch({ type: 'setDiffLevelMin', value: newValue})
+        switch (name) {
+            case "questionsNo":
+                dispatch({ type: 'setQuestionsNo', value: newValue})
+                break;
+            case "maxQuestionsNo": 
+                dispatch({ type: 'setMaxQuestionsNo', value: newValue})
+                break;
+            case "rangeMax": 
+                dispatch({ type: 'setDiffLevelMax', value: newValue})
+                break;
+            case "rangeMin": 
+                dispatch({ type: 'setDiffLevelMin', value: newValue})
+                break;
+            default:
+                break;
+        }
     }
 
     const startTest = () => {
@@ -59,8 +84,16 @@ const Settings = () => {
                     <option value="positions">{ localization.menuPositions }</option>
                     <option value="weekdays">{ localization.menuWeekdays }</option>
                 </select>
+                <label>{ localization.menuMaxQuestNo }</label>
+                <input 
+                    type="number"
+                    min='1'
+                    name="maxQuestionsNo" 
+                    defaultValue={ state.enTestLenght.maxQuestionsNo }
+                    onChange={ paramsChange }
+                />
             </div>
-            <div className="inputs" hidden={ state.testType !== 'calc'}>
+            <div className="inputs" hidden={ state.testType !== 'calc' }>
                 <label>{ localization.menuQuestNo }</label>
                 <input 
                     type="number"

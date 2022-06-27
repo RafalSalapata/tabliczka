@@ -10,7 +10,7 @@ ReactDOM.render(
       <AppContextProvider>
         <App />
       </AppContextProvider>
-      </HashRouter>
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

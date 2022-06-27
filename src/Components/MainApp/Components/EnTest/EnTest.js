@@ -21,7 +21,8 @@ const EnTest = () => {
             return res.sort( () => Math.random() - 0.5 )
         }).then( test => {
             setPhrases(test)
-            dispatch({ type: 'setQuestionsNo', value: test.length })
+            //let testLength = Math.min(test.length, state.enTestLenght.maxQuestionsNo)
+            dispatch({ type: 'setAvailableNo', value: test.length })
         }).catch( err => {
             console.log(err)
         })
@@ -40,19 +41,20 @@ const EnTest = () => {
     //it's fired when moving to the next question or, when it was the last one, to the summary stage
     const nextQuestion = () => {
         //this validates user's answer, attaches it to the answer object and add it to answer list
-        let answerCleaned = answer.trim()
-        let isCorrect = currentPhraseEn === answerCleaned
+        let testLenght = Math.min(state.enTestLenght.maxQuestionsNo, state.enTestLenght.availableNo)
+        let answerTrimed = answer.trim()
+        let isCorrect = currentPhraseEn === answerTrimed
         dispatch({ type: "addAnswer", value: {
             id : currentQuestion,
             currentPhrase: currentPhrase,
             currentPhraseEn: `"${currentPhraseEn}"`,
-            answer : `"${answerCleaned}"`,
+            answer : `"${answerTrimed}"`,
             isCorrect : isCorrect,
         }})
 
         if (isCorrect) dispatch({ type: 'increaseCorrectCounter'})
 
-        if (currentQuestion < phrases.length) {
+        if (currentQuestion < testLenght ) {
             setCurrentQuestion(currentQuestion + 1)
         } else {
             dispatch({ type: 'setStage', value: 'summary' })
